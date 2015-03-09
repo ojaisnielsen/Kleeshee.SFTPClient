@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>34c8d428-a5e2-4d50-8ed9-77f36a71da55</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Kleeshee.SftpClient</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\AsyncActionWithProgress.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NotificationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableAsyncCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RandomAccessStreamWithContentType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ReadOnlyList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\AdItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\Common.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\ISftpDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\ISftpFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\ISftpFolder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\ISftpItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\Mocks\SftpFileMock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\Mocks\SftpFolderMock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\SftpDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\SftpFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\SftpFolder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\SftpItemBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTemplateSelectors\AdItemTemplateSelector1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTemplateSelectors\AdItemTemplateSelector2.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTemplateSelectors\AdItemTemplateSelectorBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ValueConverters\FileSizeToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ValueConverters\NullableToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FileBrowserViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\IFileBrowserViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ISshSettingsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Mocks\FileBrowserViewModelMock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Mocks\SshSettingsViewModelMock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SshSettingsViewModel.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BlankFolder.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Document.png" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw">
+      <SubType>Designer</SubType>
+    </PRIResource>
+  </ItemGroup>
+</Project>
