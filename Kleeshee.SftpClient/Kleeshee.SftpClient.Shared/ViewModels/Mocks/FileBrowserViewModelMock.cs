@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Kleeshee.SftpClient.Common;
 using Kleeshee.SftpClient.DataModels.Mocks;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 
 namespace Kleeshee.SftpClient.ViewModels.Mocks
 {
@@ -39,6 +40,7 @@ namespace Kleeshee.SftpClient.ViewModels.Mocks
             var applicationId = loader.GetString("AdApplicationId1Debug");
             var adUnitId = loader.GetString("AdUnitId1Debug");
             this.files.Add(new AdItem { Id = 0, Serving = false });
+            this.folders.Add(new AdItem { Id = 1, Serving = false });
 
             this.files.AddRange(this.CurrentFolder.GetItemsAsync().Result.OfType<ISftpFile>());
             this.folders.AddRange(this.CurrentFolder.GetItemsAsync().Result.OfType<ISftpFolder>());
@@ -92,5 +94,7 @@ namespace Kleeshee.SftpClient.ViewModels.Mocks
         }
 
         public event EventHandler ShowSettings;
+
+        public event EventHandler<MessageDialog> AskReconnect;
     }
 }

@@ -17,7 +17,10 @@ namespace Kleeshee.SftpClient.ViewModels
     {
         public SshSettingsViewModel(CoreDispatcher dispatcher) : base(dispatcher)
         {
+            this.ResetOnUnload = true;
         }
+
+        public bool ResetOnUnload { get; private set; }
 
         public string Host
         {
@@ -114,26 +117,34 @@ namespace Kleeshee.SftpClient.ViewModels
         public void SetPassword(string password)
         {
             var vault = new PasswordVault();
-            vault.Add(new PasswordCredential("password", null, password));
+            vault.RemoveAll("password", null);
+            vault.Add(new PasswordCredential("password", "user1", password));
+        }
+
+        public async Task RemoveKey()
+        {
+            var vault = new PasswordVault();
+            vault.RemoveAll("key", null);
+            this.KeyFilePath = string.Empty;
         }
 
         public async Task SetKey()
         {
+            this.ResetOnUnload = false;
             var filePicker = new FileOpenPicker();
             filePicker.FileTypeFilter.Add("*");
             filePicker.ViewMode = PickerViewMode.List;
             filePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
             var keyFile = await filePicker.PickSingleFileAsync();
             var vault = new PasswordVault();
-            if (keyFile == null)
+            if (keyFile != null)
             {
                 vault.RemoveAll("key", null);
-            }
-            else
-            {
                 this.KeyFilePath = keyFile.Path;
-                vault.Add(new PasswordCredential("key", null, await FileIO.ReadTextAsync(keyFile)));
+                vault.Add(new PasswordCredential("key", "key1", await FileIO.ReadTextAsync(keyFile)));
             }
+
+            this.ResetOnUnload = true;
         }
     }
 }

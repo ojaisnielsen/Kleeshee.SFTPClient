@@ -15,8 +15,12 @@ namespace Kleeshee.SftpClient.ViewModels
 
         string KeyFilePath { get; set; }
 
+        bool ResetOnUnload { get; }
+
         void SetPassword(string password);
 
         Task SetKey();
+
+        Task RemoveKey();
     }
 }

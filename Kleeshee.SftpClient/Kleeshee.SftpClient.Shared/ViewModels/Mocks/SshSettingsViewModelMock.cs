@@ -15,6 +15,8 @@ namespace Kleeshee.SftpClient.ViewModels.Mocks
             this.KeyFilePath = @"c:\path\to\my\privatekey.key";
         }
 
+        public bool ResetOnUnload { get { return true; } }
+
         public string Host { get; set; }
 
         public string User { get; set; }
@@ -28,6 +30,10 @@ namespace Kleeshee.SftpClient.ViewModels.Mocks
         }
 
         public async Task SetKey()
+        {
+        }
+
+        public async Task RemoveKey()
         {
         }
     }

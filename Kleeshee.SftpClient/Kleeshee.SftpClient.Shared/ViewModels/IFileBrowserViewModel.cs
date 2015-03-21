@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
 namespace Kleeshee.SftpClient.ViewModels
@@ -45,5 +46,7 @@ namespace Kleeshee.SftpClient.ViewModels
         Task DeleteAsync(ISftpFile fileToDelete);
 
         event EventHandler ShowSettings;
+
+        event EventHandler<MessageDialog> AskReconnect;
     }
 }

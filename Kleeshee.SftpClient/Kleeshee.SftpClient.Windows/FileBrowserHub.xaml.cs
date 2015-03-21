@@ -53,12 +53,24 @@ namespace Kleeshee.SftpClient
             this.navigationHelper.LoadState += this.OnLoadState;
             ((App)Application.Current).DataSource.Reseted += this.OnDataSourceReseted;
             this.ViewModel.ShowSettings += OnShowSettings;
+            this.ViewModel.AskReconnect += OnAskReconnect;
         }
 
-        void OnShowSettings(object sender, EventArgs e)
+        public async void OnAskReconnect(object sender, MessageDialog e)
         {
-            var settingsFlyout = new SshSettingsFlyout();
-            settingsFlyout.Show();
+            if (!SshSettingsFlyout.HasOpenInstance)
+            {
+                await e.ShowAsync();
+            }
+        }
+
+        public void OnShowSettings(object sender, EventArgs e)
+        {
+            if (!SshSettingsFlyout.HasOpenInstance)
+            {
+                var settingsFlyout = new SshSettingsFlyout();
+                settingsFlyout.Show();
+            }
         }
 
         //public async void ActivateFilePicker(FileOpenPickerActivatedEventArgs e)

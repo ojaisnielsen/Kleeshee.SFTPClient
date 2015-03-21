@@ -23,11 +23,18 @@
         <converters2:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <x:String x:Key="TestAdApplicationId">d25517cb-12d4-4699-8bdc-52040c712cab</x:String>
         <x:String x:Key="TestAdUnitId">10043055</x:String>
-        <x:String x:Key="AdApplicationId">2d33d11e-1a10-46d3-ae1d-c1ca26352afa</x:String>
-        <x:String x:Key="AdUnitId">209060</x:String>
-        <DataTemplate x:Key="Standard310x260AdTemplate">
+        <x:String x:Key="AdApplicationId1">2d33d11e-1a10-46d3-ae1d-c1ca26352afa</x:String>
+        <x:String x:Key="AdUnitId1">209060</x:String>
+        <x:String x:Key="AdApplicationId2">2d33d11e-1a10-46d3-ae1d-c1ca26352afa</x:String>
+        <x:String x:Key="AdUnitId2">209560</x:String>
+        <DataTemplate x:Key="Standard310x260AdTemplate1">
             <Grid Height="250" Width="310" Margin="5,0,5,0" VerticalAlignment="Top">
-                <UI:AdControl x:Name="FileAd" ApplicationId="{StaticResource AdApplicationId}" AdUnitId="{StaticResource AdUnitId}" Width="300" Height="250"/>
+                <UI:AdControl x:Name="FileAd" ApplicationId="{StaticResource AdApplicationId1}" AdUnitId="{StaticResource AdUnitId1}" Width="300" Height="250"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="Standard310x260AdTemplate2">
+            <Grid Height="250" Width="310" Margin="5,0,5,0" VerticalAlignment="Top">
+                <UI:AdControl x:Name="FileAd" ApplicationId="{StaticResource AdApplicationId2}" AdUnitId="{StaticResource AdUnitId2}" Width="300" Height="250"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="Standard310x260TestAdTemplate">
@@ -58,7 +65,7 @@
                 </StackPanel>
             </Grid>
         </DataTemplate>
-        <datatemplateselectors:AdItemTemplateSelector1 x:Key="AdItemTemplateSelector" AdTemplate1="{StaticResource Standard310x260AdTemplate}" NonServingAdTemplate="{StaticResource Standard310x260TestAdTemplate}" ItemTemplate="{StaticResource Standard310x260ItemTemplate}"/>
+        <datatemplateselectors:AdItemTemplateSelector2 x:Key="AdItemTemplateSelector" AdTemplate1="{StaticResource Standard310x260AdTemplate1}" AdTemplate2="{StaticResource Standard310x260AdTemplate2}" NonServingAdTemplate="{StaticResource Standard310x260TestAdTemplate}" ItemTemplate="{StaticResource Standard310x260ItemTemplate}"/>
         <Style TargetType="HubSection">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -159,7 +166,7 @@
                         x:Name="itemGridView"
                         ItemsSource="{Binding Folders}"
                         Margin="-9,-14,0,0"
-                        ItemTemplate="{StaticResource Standard310x260ItemTemplate}"
+                        ItemTemplateSelector="{StaticResource AdItemTemplateSelector}"
                         SelectionMode="None"
                         IsSwipeEnabled="false"
                         IsItemClickEnabled="True"

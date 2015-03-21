@@ -160,12 +160,20 @@
         {
             args.Request.ApplicationCommands.Add(new SettingsCommand(
                 "SSH Settings", "SSH Settings", (handler) => ShowSettingFlyout()));
+            args.Request.ApplicationCommands.Add(new SettingsCommand(
+                "About", "About", (handler) => ShowAboutFlyout()));
         }
 
         public void ShowSettingFlyout()
         {
             var settingFlyout = new SshSettingsFlyout();
             settingFlyout.Show();
+        }
+
+        public void ShowAboutFlyout()
+        {
+            var aboutFlyout = new AboutFlyout();
+            aboutFlyout.Show();
         }
 
 #if WINDOWS_APP

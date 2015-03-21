@@ -28,8 +28,28 @@ namespace Kleeshee.SftpClient
     {
         public SshSettingsFlyout()
         {
+            SshSettingsFlyout.instances.Add(this);
             this.viewModel = new SshSettingsViewModel(this.Dispatcher);
             this.InitializeComponent();
+        }
+
+        private static readonly HashSet<SshSettingsFlyout> instances = new HashSet<SshSettingsFlyout>();
+
+        public static bool HasOpenInstance
+        {
+            get
+            {
+                return SshSettingsFlyout.instances.Any(instance => instance.IsOpen);
+            }
+        }
+
+        public bool IsOpen
+        {
+            get
+            {
+                var parent = this.Parent as Popup;
+                return parent != null && parent.IsOpen;
+            }
         }
 
         private readonly ISshSettingsViewModel viewModel;
@@ -48,9 +68,17 @@ namespace Kleeshee.SftpClient
             this.Show();
         }
 
+        private async void OnRemoveButtonClicked(object sender, RoutedEventArgs e)
+        {
+            await this.ViewModel.RemoveKey();
+        }
+
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            ((App)Application.Current).DataSource.Reset();
+            if (this.ViewModel.ResetOnUnload)
+            {
+                ((App)Application.Current).DataSource.Reset();
+            }
         }
     }
 }

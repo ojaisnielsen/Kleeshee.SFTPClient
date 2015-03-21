@@ -53,14 +53,18 @@ namespace Kleeshee.SftpClient.ViewModels
             this.DataSource = dataSource;
             this.FileSelectionMode = ListViewSelectionMode.None;
             this.AreFilesClickable = true;
+            this.Host = "Kleeshee SFTP Client";
             if (showAds)
             {
 #if DEBUG
-                var ad = new AdItem { Id = 0, Serving = false };
+                var fileAd = new AdItem { Id = 0, Serving = false };
+                var folderAd = new AdItem { Id = 1, Serving = false };
 #else
-                var ad = new AdItem { Id = 0, Serving = true };
+                var fileAd = new AdItem { Id = 0, Serving = true };
+                var folderAd = new AdItem { Id = 1, Serving = true };
 #endif
-                this.Files.Add(ad);
+                this.Files.Add(fileAd);
+                this.Folders.Add(folderAd);
             }
         }
 
@@ -219,14 +223,15 @@ namespace Kleeshee.SftpClient.ViewModels
                 Debug.WriteLine(exp);
 
                 dialog = new MessageDialog("Please provide valid SSH settings and make sure your host is reachable.");
+                dialog.Commands.Add(new UICommand("OK", new UICommandInvokedHandler((command) => this.OnShowSettings())));
+                dialog.Commands.Add(new UICommand("Not now", null));
                 this.DataSource.Dispose();
             }
 
             if (dialog != null)
             {
                 this.IsLoading = false;
-                await dialog.ShowAsync();
-                this.OnShowSettings();
+                this.OnAskReconnect(dialog);
                 return;
             }
 
@@ -247,7 +252,6 @@ namespace Kleeshee.SftpClient.ViewModels
             catch (Exception exp)
             {
                 Debug.WriteLine(exp);
-
                 dialog = new MessageDialog("Something went wrong, please try again in a bit.");
                 this.DataSource.Dispose();
             }
@@ -398,11 +402,21 @@ namespace Kleeshee.SftpClient.ViewModels
 
         public event EventHandler ShowSettings;
 
+        public event EventHandler<MessageDialog> AskReconnect;
+
         private async void OnShowSettings()
         {
             if (this.ShowSettings != null)
             {
                 await this.Invoke(() => this.ShowSettings(this, new EventArgs()));
+            }
+        }
+
+        private async void OnAskReconnect(MessageDialog dialog)
+        {
+            if (this.AskReconnect != null)
+            {
+                await this.Invoke(() => this.AskReconnect(this, dialog));
             }
         }
 
